@@ -27,14 +27,14 @@ public class Util {
             try {
                 Properties properties = new Properties();
 
-                properties.setProperty(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-                properties.setProperty(Environment.URL, "jdbc:mysql://localhost:3306/itmentor");
-                properties.setProperty(Environment.USER, "root");
+                properties.setProperty(Environment.DRIVER, "org.postgresql.Driver");
+                properties.setProperty(Environment.URL, "jdbc:postgresql://localhost:5432/itmentor");
+                properties.setProperty(Environment.USER, "postgres");
                 properties.setProperty(Environment.PASS, "root");
-                properties.setProperty(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
+                properties.setProperty(Environment.DIALECT, "org.hibernate.dialect.PostgreSQL95Dialect");
                 properties.setProperty(Environment.SHOW_SQL, "true");
                 properties.setProperty(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-                properties.setProperty(Environment.HBM2DDL_AUTO, "");
+                properties.setProperty(Environment.HBM2DDL_AUTO, "update");
 
                 sessionFactory = new Configuration().addAnnotatedClass(User.class).addProperties(properties).buildSessionFactory();
                 System.out.println("HIBER OK");
@@ -47,7 +47,7 @@ public class Util {
 
     public static Connection connection() {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/itmentor", "root", "root");
+            Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/itmentor", "postgres", "root");
             return connection;
         } catch (SQLException e) {
             System.out.println("Connection error");
